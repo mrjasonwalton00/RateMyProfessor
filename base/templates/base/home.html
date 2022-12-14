@@ -1,0 +1,106 @@
+{% extends '\Users\jwalt\Desktop\v2\Rate-My-Professor\templates\main.html' %}
+
+
+
+
+{% load static %}
+{% block content %}
+
+
+
+
+
+ <div class="container p-5" style="height: 180px; width: 800px; " >
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="text-center text-light" style="font-family: 'Poppins', sans-serif; font-size: 50px"> Rate My Professor </h1>
+                <h5 id = "text" class = "text-center my-4"  style="color: rgb(181, 191, 255);"> Enter a professor to get started! </h5>
+            </div>
+        </div>
+
+        <div class="row my-2">
+
+             <div class="row my-2">
+                <form action="{% url 'search' %}" method="GET">
+                    {% csrf_token %}
+                    <input id = "bubble" class="form-control form-control-lg"  type="text"  placeholder="Search" name="searchbar">
+                </form>
+             </div>
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+       <div class="container" style="margin-top: 200px;">
+      <div class="row">`
+
+        <div class="col">
+          <div class="card h-100" style="background-color: rgb(181, 191, 255);">
+            <i class="fa-solid fa-magnifying-glass fa-3x text-center my-3"></i>
+            <div class="card-body">
+              <h5 class="card-title text-dark text-center">Find a professor</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100" style="background-color: rgb(181, 191, 255);">
+            <i class="fa-solid fa-pencil fa-3x text-center my-3"></i>
+            <div class="card-body">
+              <h5 class="card-title text-dark text-center">Give a rating!</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100" style="background-color: rgb(181, 191, 255);">
+            <i class="fa-solid fa-book-open-reader fa-3x text-center my-3"></i>
+            <div class="card-body">
+              <h5 class="card-title text-dark text-center">Read ratings!</h5>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <div class="container-fluid bg-secondary">
+    <div class="row">
+        <div class="col">
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+{% endblock content %}
+

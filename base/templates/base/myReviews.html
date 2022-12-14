@@ -1,0 +1,86 @@
+{% extends '\Users\jwalt\Desktop\v2\Rate-My-Professor\templates\main.html' %}
+
+{% block content %}
+
+    <h1>Your reviews:</h1>
+
+    {% for review in reviews %}
+
+        {#        {% if user.id == review.user.id  %}#}
+        <div class="row shadow rounded mb-3 pt-3 mx-1" style="">
+
+            <div class="col-sm-8 col-12">
+
+                <h4>{{ review.heading }}</h4>
+
+
+            </div>
+
+
+            <div style="color:#fbec5d; display: inline">
+                {% if review.rating == 1 %}
+                    <i class="fa-solid fa-star"></i>
+                {% elif review.rating == 2 %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                {% elif review.rating == 3 %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                {% elif review.rating == 4 %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                {% elif review.rating == 5 %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                {% endif %}
+            </div>
+
+            <p>User: {{ review.user.username }}</p>
+            <p>Courses taken: {{ review.courses }}</p>
+            <p>Professor: <a href="{% url 'professorview' review.professor.id %}">{{ review.professor.name }}</a></p>
+
+
+            <br>
+            <p>Created at: {{ review.time }}</p>
+            <br>
+{#        {% if review.update_time|date:"U" > review.time|date:"U" %}#}
+{#                                <p><small>Updated: {{ task.update_time }}</small></p>#}
+{#        {% endif %}#}
+            <br>
+
+            <div class="text-end mb-3" style="">
+
+                <a class="btn btn-outline-primary" href="{% url 'update' review.id review.professor.id %}"
+                   type="button"><i
+                        class="fa-regular fa-pen-to-square"></i></a>
+
+
+                <form action="{% url 'delete' review.id %}" method="POST" style="display:inline-block">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" style="display:inline-block" type="submit"><i
+                            class="fa-solid fa-x"></i></button>
+                </form>
+            </div>
+
+
+        </div>
+        </div>
+
+
+
+        {#        {% endif %}#}
+
+        {% empty %}
+            <h3 class="mt-2"> &nbsp You have not added any reviews yet.</h3>
+
+
+    {% endfor %}
+
+
+{% endblock %}

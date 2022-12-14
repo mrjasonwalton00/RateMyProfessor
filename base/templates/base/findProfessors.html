@@ -1,0 +1,72 @@
+{% extends '\Users\jwalt\Desktop\v2\Rate-My-Professor\templates\main.html' %}
+
+
+
+{% block content %}
+    {% if search_item != "" %}
+    <h1 class="m-5"> Results for "{{ search_item }}" : </h1>
+    {% else %}
+    <h1> All Professors </h1>
+    {% endif %}
+
+
+
+    {% for professor in professors %}
+        <div class="container p-5">
+            <div class="row shadow-lg rounded mb-3 pt-3 mx-5 bg-secondary p-5">
+                <div class="col-9">
+                    <h2> <a href="{% url 'professorview' professor.id %}">{{ professor.name }}</a> </h2>
+                </div>
+                <div class="col-3">
+                    <h5 class="text-light"> {{ professor.rating }} <span style="color:#fbec5d;">
+                        {% if professor.rating < 2 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                        {% elif professor.rating < 3 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                        {% elif professor.rating < 4 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                        {% elif professor.rating < 5 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star" style="color:white"></i>
+                        {% elif professor.rating == 5 %}
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        {% endif %}
+                    </span></h5>
+
+                </div>
+
+                <div class="row" style="margin-top: 15px">
+                    <h5 class = "text-dark"> <u> {{ professor.department }} </u>  </h5>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+    {% endfor %}
+
+
+
+{% endblock content %}

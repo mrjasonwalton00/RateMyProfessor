@@ -1,0 +1,21 @@
+{% extends '\Users\jwalt\Desktop\v2\Rate-My-Professor\templates\main.html' %}
+
+{% block content %}
+
+    <h1 class = "text-center my-5">Register</h1>
+    <div class="container d-flex justify-content-center bg-secondary rounded shadow-lg">
+        <div class="row">
+            <div class="col">
+                <form action="{% url 'register' %}" method="POST" class="form-sign-up my-5">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}

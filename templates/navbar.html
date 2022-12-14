@@ -1,0 +1,61 @@
+{% load static %}
+
+
+
+<!-- Nav Bar -->
+    <nav id = "nav" class="navbar sticky-top navbar-expand-xxl p-5" style="background-color: rgba(66,66,66,0.76);">
+        <div class="container-fluid">
+            <a class="navbar-brand shadow-lg rounded p-2" href="{% url 'home' %}"> <img src = "{% static 'images/RMP.png' %}" width="350px" style="border-radius: 8px ">  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-3">
+
+                <li class="nav-item mx-3">
+                  {% if user.is_authenticated %}
+                    <a class="nav-link active shadow-lg rounded" href="{% url 'myReviews' %}" style="color: #b4befd"> {{ user.username }}</a>
+                  {% endif %}
+                </li>
+
+              <li class="nav-item mx-3">
+                <a class="nav-link active text-light shadow-lg rounded" aria-current="page" href="{% url 'allProfessors' %}">Find a Professor</a>
+              </li>
+
+              <li class="nav-item mx-3">
+                <a class="nav-link active text-light shadow-lg rounded" aria-current="page" href="{% url 'departments' %}">Search Departments</a>
+              </li>
+
+
+
+
+
+
+              <li class="nav-item mx-3">
+                  {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="nav-link active bg-light shadow-lg rounded"> Log Out </a>
+
+                  {% else %}
+                      <a class="nav-link active shadow-lg rounded" aria-current="page" href="{% url 'login' %}" style="background-color: #f6f7f8; color: #212529;">Log In</a>
+                  {% endif %}
+
+              </li>
+
+
+            </ul>
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <!-- End Nav Bar -->
+
+
+
+
+  

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Signika:wght@700&family=Zen+Kaku+Gothic+Antique:wght@700&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <style>
+        .stars > input {
+            display: none;
+        }
+
+        .stars {
+            display: inline-block;
+            border: 0;
+        }
+
+        .stars > label {
+            float: right;
+
+        }
+
+        .stars > label:before {
+            display: inline-block;
+            font-size: 1.1rem;
+        {#font-family:FontAwesome;#}{#content:"\f005";#} padding: .2rem;
+            cursor: pointer;
+        }
+
+        input:checked ~ label, label:hover ~ label {
+            color: #fbec5d;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row d-flex justify-content-center mt-3">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    Add a review:
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'addreview' professor.id user.id %}" method="POST">
+                        {% csrf_token %}
+                        Heading:
+                        <input type="text" name="heading" required>
+                        <br>
+                        <br>
+                        Course:
+                        <select name="courses" id="" style="width:100%;height:100%" required>
+                            {% for c in courses %}
+
+                                <option value="{{ c.course }}">{{ c.course }}</option>
+
+                            {% endfor %}
+                        </select>
+
+                        <br>
+
+                        <br>
+                        Rating:
+                        <br>
+                        <div class="stars">
+                            <input type="radio" name="rating" id="5star" value="5.0" required><label for="5star"><i
+                                class="fa-solid fa-star"></i></label>
+                            <input type="radio" name="rating" id="4star" value="4.0" required><label for="4star"><i
+                                class="fa-solid fa-star"></i></label>
+                            <input type="radio" name="rating" id="3star" value="3.0" required><label for="3star"><i
+                                class="fa-solid fa-star"></i></label>
+                            <input type="radio" name="rating" id="2star" value="2.0" required><label for="2star"><i
+                                class="fa-solid fa-star"></i></label>
+                            <input type="radio" name="rating" id="1star" value="1.0" required><label for="1star"><i
+                                class="fa-solid fa-star"></i></label>
+                        </div>
+                        <br>
+                        Review:
+                        <br>
+                        <textarea name="review" id="" cols="50" rows="10" required></textarea>
+                        <br>
+
+
+                        <button class="btn btn-primary mt-3 mb-3" type="submit" id="save">
+                            <i class="fa-solid fa-floppy-disk"></i> Save
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-6 mt-3">
+            <a class="btn btn-warning" href="{% url 'professorview' professor.id %}" role="button"> Go back</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let j = document.getElementById('save');
+    if (i.style.display === 'none') {
+
+        j.style.display = 'none';
+
+    }
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

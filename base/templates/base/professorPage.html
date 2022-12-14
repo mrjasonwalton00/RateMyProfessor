@@ -1,0 +1,182 @@
+{% extends '\Users\jwalt\Desktop\v2\Rate-My-Professor\templates\main.html' %}
+{% block content %}
+
+    <div class="container">
+    <div class="row">
+        <div class="col-lg">
+            <div class="lead text-center mt-3  shadow-lg rounded p-5" style="margin-left: 200px; margin-right: 200px;">
+        <h1 class="text-light">
+            {{ professor.name }}
+            <h5 class="text-light my-5 shadow-lg rounded p-2">Department: {{ professor.department }}</h5>
+
+        </h1>
+        <img class="rounded shadow-lg" src="{{ professor.picture }}" alt="Picture of Professor">
+        <br>
+        <div class="text-center text-light">{{ professor.rating }}</div>
+           <div style="color:#fbec5d; display: inline">
+            {% if professor.rating < 2 %}
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+            {% elif professor.rating < 3 %}
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+            {% elif professor.rating < 4 %}
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+            {% elif professor.rating < 5 %}
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star" style="color:black"></i>
+            {% elif professor.rating == 5 %}
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+            {% endif %}
+        </div>
+
+    </div>
+
+        </div>
+    </div>
+    </div>
+
+    <div class="container d-flex justify-content-center my-5 p-5">
+        <div class="row">
+            <div class="col">
+                {% if user.is_authenticated %}
+                    <a id = "write-review" href="{% url 'addreview' professor.id user.id %}" class="btn btn-lg active shadow-lg" role="button" aria-pressed="true">Click here to give a review!</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="container-fluid bg-secondary my-5" style="margin-top: 50px; height: 1000px">
+<div class="row">
+    <div class="col">
+        <h2 class="text-center text-light my-5"><strong>Reviews:</strong></h2>
+        {% for review in reviews %}
+
+
+
+
+                <div class="text-center rounded shadow-lg">
+                <h4>{{ review.heading }}</h4>
+                <p> <u>Course taken:</u> {{ review.courses }}</p>
+                <div style="color:#fbec5d;">
+                    {% if review.rating == 1 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                    {% elif review.rating == 2 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                    {% elif review.rating == 3 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                    {% elif review.rating == 4 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star" style="color:black"></i>
+                    {% elif review.rating == 5 %}
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    {% endif %}
+                </div>
+
+                <p>User: {{ review.user.username }}</p>
+
+
+
+                <p>Posted at: {{ review.time }}</p>
+                {% if review.update_time|date:"U" > review.time|date:"U" %}
+                    <p>Edited at: {{ review.update_time }}</p>
+                {% endif %}
+                <br>
+                {% if review.user.id == user.id %}
+                    <script>
+                        let i = document.getElementById('off');
+                        i.style.display = 'none';
+                        let bool = true;
+                    </script>
+                    <div class="text-end mb-3" style="">
+
+                        <a class="btn btn-primary m-2" href="{% url 'update' review.id professor.id %}"
+                           type="button"><i
+                                class="fa-regular fa-pen-to-square"></i></a>
+
+
+                        <form action="{% url 'delete' review.id %}" method="POST" style="display:inline-block">
+                            {% csrf_token %}
+                            <button class="btn btn-danger m-2" style="display:inline-block" type="submit"><i
+                                    class="fa-solid fa-x"></i></button>
+                        </form>
+                    </div>
+                {% else %}
+                    <script>
+                        if (bool) {
+
+                        } else {
+                            let i = document.getElementById('off');
+                            i.style.display = 'block';
+                        }
+                    </script>
+                {% endif %}
+
+
+            </div>
+            </div>
+
+
+
+        {% empty %}
+            <h4>No reviews have been posted for {{ professor.name }} yet.</h4>
+
+
+    {% endfor %}
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+

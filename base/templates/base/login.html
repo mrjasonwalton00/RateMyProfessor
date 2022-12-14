@@ -1,0 +1,35 @@
+{% extends '\Users\jwalt\Desktop\v2\Rate-My-Professor\templates\main.html' %}
+
+{% block content %}
+
+<h1 class="text-center my-5"> Welcome </h1>
+
+<div class="container d-flex justify-content-center bg-secondary p-5 rounded shadow-lg">
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'login' %}" method="POST" class="form-sign-in">
+                {% csrf_token %}
+                <!-- Email input -->
+                {{ form.as_div }}
+
+
+
+
+    <!-- Submit button -->
+    <input class="" type="submit"></input>
+
+
+    <!-- Register buttons -->
+    <div class="text-center my-5">
+      <p>Not a member? </p>
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"> Register Here </a>
+    </div>
+  </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
